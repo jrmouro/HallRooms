@@ -21,11 +21,11 @@ public class HallRoomsTest {
     @Test
     public void testGetCost() {
         
-        System.out.println("getCost");
+        System.out.println("Test\n");
         
-        HallRooms instance = new HallRooms(new File("Inst-10salas-1374.txt"), ",");
+        HallRooms instance = new HallRooms(new File("Inst-4salas-1374.txt"), ",");
         
-        System.out.println(instance.getCost());
+        System.out.println(instance);
         
     }
     

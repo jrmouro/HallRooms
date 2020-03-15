@@ -9,6 +9,6 @@ package com.jrmouro.hallrooms;
  *
  * @author ronaldo
  */
-public interface IAllocator {
-    public Allocation allocate(IHallRoomsInstance instance);
+public interface IAllocatorN2 {
+    public AllocationN2 allocate(IHallRoomsInstance instance);
 }

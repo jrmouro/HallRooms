@@ -9,15 +9,15 @@ package com.jrmouro.hallrooms;
  *
  * @author ronaldo
  */
-public class NaiveAllocator implements IAllocator{
+public class NaiveAllocatorN2 implements IAllocatorN2{
     
     @Override
-        public Allocation allocate(IHallRoomsInstance instance) {
+        public AllocationN2 allocate(IHallRoomsInstance instance) {
             
             int n = instance.getRoomsNumber();
             
             
-            Allocation ret = new Allocation(n);
+            AllocationN2 ret = new AllocationN2(n);
 
             Double d1 = 0.0;
             Double d2 = 0.0;
@@ -29,11 +29,11 @@ public class NaiveAllocator implements IAllocator{
                 ret.getAllocMatrixN2()[i][0] = d1 + (w / 2.0);
                 ret.getAllocMatrixN2()[i][1] = null;
                 
-                Double c1 = Allocation.getCost(instance, Allocation.getDistanceMatrix(ret));
+                Double c1 = AllocationN2.getTotalCost(instance, AllocationN2.getDistanceMatrix(ret));
                 
                 ret.getAllocMatrixN2()[i][0] = null;
                 ret.getAllocMatrixN2()[i][1] = d2 + (w / 2.0);
-                Double c2 = Allocation.getCost(instance, Allocation.getDistanceMatrix(ret));
+                Double c2 = AllocationN2.getTotalCost(instance, AllocationN2.getDistanceMatrix(ret));
 
                 if (c1 < c2) {
 

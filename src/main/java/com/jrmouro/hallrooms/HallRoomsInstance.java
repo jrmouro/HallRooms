@@ -173,7 +173,26 @@ public class HallRoomsInstance implements IHallRoomsInstance {
 
     @Override
     public String toString() {
-        return "HallRoomsInstance{\n" + "flow=\n" + flow + "\nwidth=" + width + "\n}";
+        
+        StringBuffer str = new StringBuffer("HallRoomsInstance\n");
+        
+        str.append("width: ");
+        for (Double d : this.width) {
+            str.append(d).append(" ");
+        }
+        
+        
+        str.append("\nflow:\n");
+        for (Integer d[] : this.flow) {
+            str.append(" ");
+            for (Integer dd : d) {
+                str.append(dd).append(" ");
+            } 
+            str.append("\n");
+        }
+        
+        return str.toString();
+        
     }
     
     
