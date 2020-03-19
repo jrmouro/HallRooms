@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jrmouro.hallrooms;
+package com.jrmouro.hallrooms.hallroomsinstance;
 
 /**
  *
  * @author ronaldo
  */
-public interface IAllocatorN2 {
-    public AllocationN2 allocate(IHallRoomsInstance instance);
+public interface ISplitter {
+    public String get();
 }

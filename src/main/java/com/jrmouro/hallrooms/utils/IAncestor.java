@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jrmouro.hallrooms;
+package com.jrmouro.hallrooms.utils;
 
 /**
  *
  * @author ronaldo
  */
-public interface Initializable {
-    public void initialize(Object... o);
-    public boolean isInitialized();
+public interface IAncestor extends Initializable{
+    public boolean isAncestor();
 }

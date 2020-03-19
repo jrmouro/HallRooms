@@ -1,5 +1,6 @@
-package com.jrmouro.hallrooms;
+package com.jrmouro.hallrooms.hallroomsinstance;
 
+import com.jrmouro.hallrooms.utils.Initializable;
 import java.io.File;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public interface IHallRoomsInstance extends Initializable{
     public Integer getRoomsNumber();
     public Integer getFlow(int ind1, int ind2);
+    public Integer[][] getFlow();
     public Double getWidth(int ind);
-    public void read(File file, String splitter);
-    public void write(File file, String splitter);
+    //public void read();
 }

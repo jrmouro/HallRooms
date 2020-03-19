@@ -5,6 +5,11 @@
  */
 package com.jrmouro.hallrooms;
 
+import com.jrmouro.hallrooms.allocator.hungarian.HungarianAllocatorN2;
+import com.jrmouro.hallrooms.allocator.naive.NaiveAllocatorN2;
+import com.jrmouro.hallrooms.allocator.selection.RandomRateSelection;
+import com.jrmouro.hallrooms.allocator.selection.Selection;
+import com.jrmouro.hallrooms.hallroomsinstance.ISplitter;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 
@@ -23,9 +28,22 @@ public class HallRoomsTest {
         
         System.out.println("Test\n");
         
-        HallRooms instance = new HallRooms(new File("Inst-4salas-1374.txt"), ",");
+        ISplitter splitter = new ISplitter(){
+                    @Override
+                    public String get() {
+                        return ",";
+                    }
+                };
+        Selection selection = new RandomRateSelection(.5);
+        HallRooms instance1 = new HallRooms(new File("Inst-10salas-1374.txt"), splitter, new NaiveAllocatorN2(selection));
+        HallRooms instance2 = new HallRooms(new File("Inst-10salas-1374.txt"), splitter, new HungarianAllocatorN2(selection));
+        instance1.evaluate();
+        instance2.evaluate();
         
-        System.out.println(instance);
+        System.out.println("\ninstance1");
+        System.out.println(instance1);
+        System.out.println("\n\ninstance1");
+        System.out.println(instance2);
         
     }
     

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.jrmouro.hallrooms;
+package com.jrmouro.hallrooms.allocator;
 
+import com.jrmouro.hallrooms.allocator.hungarian.HungarianAllocatorN2;
+import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
 import com.jrmouro.hallrooms.hallroomsinstance.HallRoomsReaderInstance;
 import com.jrmouro.hallrooms.hallroomsinstance.ISplitter;
 import java.io.File;
@@ -14,17 +16,20 @@ import org.junit.jupiter.api.Test;
  *
  * @author ronaldo
  */
-public class HallRoomsInstanceTest {
+public class HungarianAllocattorTest {
     
-   
-
+    
 
     /**
-     * Test of read method, of class HallRoomsReaderInstance.
+     * Test of allocate method, of class HungarianAllocatorN2.
      */
     @Test
-    public void testRead() {
-        System.out.println("read");
+    public void testAllocate() {
+        System.out.println("allocate");
+        
+        SelectionAllocatorN2 allocator = new HungarianAllocatorN2();
+        allocator.setSelection(new OrderSelection());
+        
         
         HallRoomsReaderInstance instance = new HallRoomsReaderInstance(
                 new File("Inst-10salas-1374.txt"),
@@ -33,11 +38,12 @@ public class HallRoomsInstanceTest {
                     public String get() {
                         return ",";
                     }
-                });        
+                }); 
         
         System.out.println(instance);
+        
+        System.out.println(allocator.allocate(instance));
+        
     }
-
-    
     
 }
