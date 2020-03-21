@@ -6,6 +6,7 @@
 package com.jrmouro.hallrooms.utils.experiment;
 
 import com.jrmouro.hallrooms.utils.Initializable;
+import com.jrmouro.hallrooms.utils.evaluable.HardEvaluable;
 import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,13 +15,12 @@ import java.util.logging.Logger;
  *
  * @author ronaldo
  */
-public abstract class Experiment<T> implements IExperiment<T>, Initializable {
+public abstract class Experiment<T> extends HardEvaluable<T> implements IExperiment<T> {
 
     private Long nanos = null;
     protected IEvaluable<T> evaluable = null;
 
-    public Experiment() {
-    }
+    public Experiment() {}
 
     public Experiment(IEvaluable<T> evaluable) {
         this.evaluable = evaluable;
@@ -42,14 +42,22 @@ public abstract class Experiment<T> implements IExperiment<T>, Initializable {
 
     @Override
     public Double nanosRate(IExperiment<T> other) {
-        try {
-            if (other.wasEvaluated()) {
-                if (this.wasEvaluated()) {
-                    return Double.longBitsToDouble(this.nanosTime()) / Double.longBitsToDouble(other.nanosTime());
-                }
-            }
 
-            throw new Exception("Did not evaluated");
+        try {
+
+            if (other instanceof Experiment) {
+
+                if (((Experiment)other).wasEvaluated()) {
+                    if (this.wasEvaluated()) {
+                        return Double.longBitsToDouble(this.nanosTime()) / Double.longBitsToDouble(other.nanosTime());
+                    }
+                }
+
+                throw new Exception("Did not evaluated");
+
+            } else {
+                throw new Exception("Experiment works only with other Experiment");
+            }
 
         } catch (Exception ex) {
             Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,8 +72,13 @@ public abstract class Experiment<T> implements IExperiment<T>, Initializable {
     }
 
     @Override
-    public void evaluate() {
+    public void reset() {
+        this.nanos = null;
+    }
 
+    @Override
+    protected boolean processEvaluation() {
+        
         if (this.isInitialized()) {
 
             this.nanos = System.nanoTime();
@@ -74,6 +87,8 @@ public abstract class Experiment<T> implements IExperiment<T>, Initializable {
 
             this.nanos = System.nanoTime() - this.nanos;
 
+            return true;
+
         } else {
             try {
                 throw new Exception("Do not initialized");
@@ -81,12 +96,14 @@ public abstract class Experiment<T> implements IExperiment<T>, Initializable {
                 Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        
+        return false;
     }
 
     @Override
     public T evaluation() {
         try {
+            
             if (this.wasEvaluated()) {
                 return this.evaluable.evaluation();
             }
@@ -122,14 +139,13 @@ public abstract class Experiment<T> implements IExperiment<T>, Initializable {
 
     @Override
     public void initialize(Object... o) {
-        if(o != null)
+        if (o != null) {
             for (Object object : o) {
-                if(object instanceof IEvaluable){
-                    this.evaluable = (IEvaluable<T>) object;                    
+                if (object instanceof IEvaluable) {
+                    this.evaluable = (IEvaluable<T>) object;
                 }
             }
+        }
     }
-    
-    
 
 }

@@ -37,8 +37,12 @@ public class HallRoomsTest {
         Selection selection = new RandomRateSelection(.5);
         HallRooms instance1 = new HallRooms(new File("Inst-10salas-1374.txt"), splitter, new NaiveAllocatorN2(selection));
         HallRooms instance2 = new HallRooms(new File("Inst-10salas-1374.txt"), splitter, new HungarianAllocatorN2(selection));
-        instance1.evaluate();
-        instance2.evaluate();
+        
+        if(!instance1.wasEvaluated())
+            instance1.evaluate();
+        
+        if(!instance2.wasEvaluated())
+            instance2.evaluate();
         
         System.out.println("\ninstance1");
         System.out.println(instance1);

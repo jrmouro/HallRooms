@@ -5,6 +5,8 @@
  */
 package com.jrmouro.hallrooms.allocator.naive;
 
+import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import java.util.ArrayList;
@@ -35,9 +37,9 @@ public class NaiveAllocatorN2 extends SelectionAllocatorN2 {
     }
 
     @Override
-    public List<Integer> queue(IHallRoomsInstance instance) {
+    public IHallRoomsQueue queue(IHallRoomsInstance instance) {
         if (this.isInitialized()) {
-            List<Integer> ret = new ArrayList();
+            IHallRoomsQueue ret = new HallRoomsQueue();
             for (int i = 0; i < instance.getRoomsNumber(); i++) {
                 ret.add(i);
             }

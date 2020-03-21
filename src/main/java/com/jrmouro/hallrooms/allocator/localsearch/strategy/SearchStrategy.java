@@ -6,7 +6,9 @@
 package com.jrmouro.hallrooms.allocator.localsearch.strategy;
 
 import com.jrmouro.hallrooms.allocation.AllocationN2;
+import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.IAllocatorN2;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
  */
 public abstract class SearchStrategy implements ISearchStrategy {
 
-    protected AllocationN2 allocate(IHallRoomsInstance instance, List<Integer> queue) {
+    protected AllocationN2 allocate(IHallRoomsInstance instance, IHallRoomsQueue queue) {
 
         Selection selection = new OrderSelection();
 
@@ -27,24 +29,24 @@ public abstract class SearchStrategy implements ISearchStrategy {
 
     }
 
-    public List<List<Integer>> queues(IHallRoomsInstance instance, List<Integer> initial) {
+    public List<IHallRoomsQueue> queues(IHallRoomsInstance instance, IHallRoomsQueue initial) {
 
-        List<List<Integer>> ret = new ArrayList();
+        List<IHallRoomsQueue> ret = new ArrayList();
 
         for (int i = 0; i < initial.size() - 1; i++) {
 
             for (int j = i + 1; j < initial.size(); j++) {
 
-                List<Integer> list = new ArrayList();
+                IHallRoomsQueue queue = new HallRoomsQueue();
                 for (Integer ind : initial) {
-                    list.add(ind);
+                    queue.add(ind);
                 }
 
-                Integer aux = list.get(i);
-                list.set(i, list.get(j));
-                list.set(j, aux);
+                Integer aux = queue.get(i);
+                queue.set(i, queue.get(j));
+                queue.set(j, aux);
 
-                ret.add(list);
+                ret.add(queue);
 
             }
 

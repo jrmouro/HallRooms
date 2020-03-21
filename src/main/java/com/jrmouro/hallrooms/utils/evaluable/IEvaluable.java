@@ -12,7 +12,9 @@ package com.jrmouro.hallrooms.utils.evaluable;
 public interface IEvaluable<T> extends Comparable<IEvaluable<T>> {
     public boolean wasEvaluated();
     public T evaluation();
-    public void evaluate();
+    public boolean evaluate();
+    public boolean re_evaluate();
     public T evaluationRate(IEvaluable<T> other);
     public T evaluationRate(T value);
+    public void reset();
 }

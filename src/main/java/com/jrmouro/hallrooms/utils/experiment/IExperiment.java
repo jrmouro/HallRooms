@@ -5,13 +5,14 @@
  */
 package com.jrmouro.hallrooms.utils.experiment;
 
+import com.jrmouro.hallrooms.utils.Initializable;
 import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
 
 /**
  *
  * @author ronaldo
  */
-public interface IExperiment<T> extends IEvaluable<T>{
+public interface IExperiment<T> extends Initializable{
     
     public Long nanosTime();
     public Double nanosRate(IExperiment<T> other);

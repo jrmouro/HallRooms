@@ -5,6 +5,7 @@
  */
 package com.jrmouro.hallrooms.allocator.selection;
 
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import java.util.List;
 import java.util.Random;
 
@@ -16,7 +17,7 @@ public class RandomRateSelection extends Selection {
 
     final double rate;
 
-    public RandomRateSelection(List<Integer> queue, double rate) {
+    public RandomRateSelection(IHallRoomsQueue queue, double rate) {
         super(queue);
         this.rate = rate;
     }

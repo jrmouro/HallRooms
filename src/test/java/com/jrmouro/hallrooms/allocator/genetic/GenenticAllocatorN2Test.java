@@ -50,15 +50,18 @@ public class GenenticAllocatorN2Test {
         
         Selection selection = new RandomSelection();
         HallRooms naiveHall = new HallRooms(instance, new NaiveAllocatorN2(selection));
-        HallRooms genecticHall = new HallRooms(instance, geneticAllocator);
-        naiveHall.evaluate();
+        HallRooms geneticHall = new HallRooms(instance, geneticAllocator);
         
-        genecticHall.evaluate();
+        if(!naiveHall.wasEvaluated())
+            naiveHall.evaluate();
+        
+        if(!geneticHall.wasEvaluated())
+            geneticHall.evaluate();
         
         System.out.println("\ninstance1");
         System.out.println(naiveHall);
         System.out.println("\n\ninstance1");
-        System.out.println(genecticHall);
+        System.out.println(geneticHall);
         
         
     }

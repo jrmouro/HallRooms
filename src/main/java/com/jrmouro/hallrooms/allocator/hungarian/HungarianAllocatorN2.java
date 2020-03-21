@@ -5,6 +5,9 @@
  */
 package com.jrmouro.hallrooms.allocator.hungarian;
 
+import com.jrmouro.hallrooms.allocation.AllocationN2;
+import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class HungarianAllocatorN2 extends SelectionAllocatorN2 {
         super(selection, isAncestor);
     }
 
-    public List<Integer> queue(IHallRoomsInstance instance) {
+    public IHallRoomsQueue queue(IHallRoomsInstance instance) {
 
         if (this.isInitialized()) {
 
@@ -90,8 +93,9 @@ public class HungarianAllocatorN2 extends SelectionAllocatorN2 {
 
     }
 
-    private List<Integer> reduce(List<Integer> orig, int n) {
-        List<Integer> ret = new ArrayList();
+    private IHallRoomsQueue reduce(List<Integer> orig, int n) {
+        
+        IHallRoomsQueue ret = new HallRoomsQueue();
 
         boolean[] mark = new boolean[n];
         for (int i = 0; i < n; i++) {
@@ -112,5 +116,7 @@ public class HungarianAllocatorN2 extends SelectionAllocatorN2 {
     public String toString() {
         return "HungarianAllocatorN2  " + this.getSelection().toString();
     }
+
+    
 
 }

@@ -6,6 +6,7 @@
 package com.jrmouro.hallrooms.allocator.localsearch.strategy;
 
 import com.jrmouro.hallrooms.allocation.AllocationN2;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import java.util.List;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 
@@ -16,23 +17,23 @@ import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 public class BestSearchStrategy extends SearchStrategy {
 
     @Override
-    public AllocationN2 search(IHallRoomsInstance instance, List<Integer> atualQueue) {
+    public AllocationN2 search(IHallRoomsInstance instance, IHallRoomsQueue atualQueue) {
 
         AllocationN2 atualAllocation = this.allocate(instance, atualQueue);
 
-        List<Integer> queueSave = atualQueue;
+        IHallRoomsQueue queueSave = atualQueue;
 
         Double atualCost = atualAllocation.getCost();
 
-        List<List<Integer>> queues = queues(instance, atualQueue);
+        List<IHallRoomsQueue> queues = queues(instance, atualQueue);
 
         boolean flag = false;
 
-        for (List<Integer> queue : queues) {
+        for (IHallRoomsQueue queue : queues) {
 
             AllocationN2 neighborAllocation = this.allocate(instance, queue);
 
-            Double neighborCost = AllocationN2.getTotalCost(instance, neighborAllocation, true);
+            Double neighborCost = AllocationN2.getTotalCost(instance, neighborAllocation/*, true*/);
 
             if (neighborCost < atualCost) {
                 atualCost = neighborCost;

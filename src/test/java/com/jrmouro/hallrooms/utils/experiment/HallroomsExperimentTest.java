@@ -7,8 +7,7 @@ package com.jrmouro.hallrooms.utils.experiment;
 
 import com.jrmouro.hallrooms.HallRooms;
 import com.jrmouro.hallrooms.allocator.naive.NaiveAllocatorN2;
-import com.jrmouro.hallrooms.allocator.selection.RandomSelection;
-import com.jrmouro.hallrooms.hallroomsinstance.ISplitter;
+import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 
@@ -25,21 +24,16 @@ public class HallroomsExperimentTest {
     public void testEvaluation() {
         
         System.out.println("testEvaluation\n\n");
-        IExperiment instance = new HallRoomsExperiment(
-                new HallRooms(
-                    new File("Inst-10salas-1374.txt"), 
-                    new ISplitter(){
-                        @Override
-                        public String get() {
-                            return ",";
-                        }
-                    },
-                    new NaiveAllocatorN2(
-                        new RandomSelection())
-                )
+        
+        Experiment<Double> instance = new HallRoomsExperiment(
+            new HallRooms(
+                new File("Inst-4salas-1374.txt"), () -> ",",
+                new NaiveAllocatorN2(new OrderSelection())
+            )
         );
         
-        instance.evaluate();
+        if(!instance.wasEvaluated())
+            instance.evaluate();
         
         System.out.println(instance);
         

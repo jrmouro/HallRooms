@@ -55,7 +55,8 @@ public class LocalSearchAllocatorN2Test {
         
         exp.initialize(o);
         
-        exp.evaluate();
+        if(!exp.wasEvaluated())
+            exp.evaluate();
         
         System.out.println(exp);        
         

@@ -6,7 +6,7 @@
 package com.jrmouro.hallrooms.allocator.localsearch.strategy;
 
 import com.jrmouro.hallrooms.allocation.AllocationN2;
-import java.util.List;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 
 /**
@@ -15,6 +15,6 @@ import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
  */
 public interface ISearchStrategy {
     
-    public AllocationN2 search(IHallRoomsInstance instance, List<Integer> atualQueue);
+    public AllocationN2 search(IHallRoomsInstance instance, IHallRoomsQueue atualQueue);
     
 }

@@ -8,8 +8,8 @@ package com.jrmouro.hallrooms.allocator.localsearch;
 import com.jrmouro.hallrooms.allocator.localsearch.strategy.ISearchStrategy;
 import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.AncestorAllocatorN2;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
-import com.jrmouro.hallrooms.allocator.IAllocatorN2;
 import java.util.List;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 import java.util.logging.Level;
@@ -64,7 +64,7 @@ public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
         
         if(this.isInitialized()){
 
-            List<Integer> initial = this.initialAllocator.queue(instance);
+            IHallRoomsQueue initial = this.initialAllocator.queue(instance);
 
             return this.strategy.search(instance, initial);
         
@@ -80,6 +80,27 @@ public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
 
         return null;
     }
+
+    @Override
+    public AllocationN2 allocate(AllocationN2 allocation) {
+        if(this.isInitialized()){
+            
+            return this.strategy.search(allocation.getInstance(), allocation.getQueue());
+        
+        }else{
+            
+            try {
+                throw new Exception("Do not initialized");
+            } catch (Exception ex) {
+                Logger.getLogger(LocalSearchAllocatorN2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+
+        return null;
+    }
+    
+    
 
     @Override
     public String toString() {

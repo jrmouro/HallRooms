@@ -9,10 +9,13 @@ import com.jrmouro.genetic.chromosome.ChromosomeAbstract;
 import com.jrmouro.genetic.fitnessfunction.FitnessFunction;
 import com.jrmouro.genetic.integer.IntegerChromosome;
 import com.jrmouro.genetic.integer.IntegerPopulation;
+import com.jrmouro.genetic.integer.indexed.IndexedChromosome;
 import com.jrmouro.genetic.integer.indexed.IndexedGeneticAlgorithm;
 import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.AncestorAllocatorN2;
+import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.IAllocatorN2;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 import java.util.List;
@@ -79,9 +82,11 @@ public class GenenticAllocatorN2 extends AncestorAllocatorN2{
                
         @Override
         public double fitness(ChromosomeAbstract<Integer> chromosome) {
-            List<Integer> rep = chromosome.getGenotype();
-            AllocationN2 allocation = IAllocatorN2.allocate(instance, new OrderSelection(), rep);
-            allocation.evaluate();
+            IHallRoomsQueue queue = new HallRoomsQueue(chromosome.getGenotype());
+            AllocationN2 allocation = IAllocatorN2.allocate(instance, new OrderSelection(), queue);
+            if(!allocation.wasEvaluated()){
+                allocation.evaluate();
+            }
             return -allocation.evaluation();
         }
         
@@ -108,9 +113,42 @@ public class GenenticAllocatorN2 extends AncestorAllocatorN2{
         
         IntegerChromosome chrom = (IntegerChromosome) pop.getFittestChromosome();
         
-        return IAllocatorN2.allocate(instance, new OrderSelection(), chrom.getGenotype());
+        IHallRoomsQueue queue = new HallRoomsQueue(chrom.getGenotype());
+        
+        return IAllocatorN2.allocate(instance, new OrderSelection(), queue);
         
     }
+
+    @Override
+    public AllocationN2 allocate(AllocationN2 allocation) {
+        
+        IndexedChromosome fitnessChromosome = new IndexedChromosome(
+                new AllocatorN2FitnessFunction(allocation.getInstance()), 
+                IHallRoomsQueue.getQueueList(allocation.getQueue()));
+        
+        IndexedGeneticAlgorithm ga = new IndexedGeneticAlgorithm(
+                fitnessChromosome,
+                this.populationSize,
+                this.populationReuse,
+                allocation.getInstance().getRoomsNumber()-1,
+                this.aritySelection,
+                this.generations,                
+                this.crossoverRate,
+                this.mutationRate,
+                this.mutationRateGene
+        );
+        
+        IntegerPopulation pop = (IntegerPopulation) ga.run();
+        
+        IntegerChromosome chrom = (IntegerChromosome) pop.getFittestChromosome();
+        
+        IHallRoomsQueue queue = new HallRoomsQueue(chrom.getGenotype());
+        
+        return IAllocatorN2.allocate(allocation.getInstance(), new OrderSelection(), queue);
+        
+    }
+    
+    
 
     @Override
     public boolean isAncestor() {

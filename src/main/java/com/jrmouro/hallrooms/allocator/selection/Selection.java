@@ -5,6 +5,8 @@
  */
 package com.jrmouro.hallrooms.allocator.selection;
 
+import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,17 +17,17 @@ import java.util.List;
  */
 public abstract class Selection implements Iterator<Integer> {
 
-    final protected List<Integer> queue = new ArrayList();
+    final protected IHallRoomsQueue queue = new HallRoomsQueue();
 
     public Selection() { }
 
-    public Selection(final List<Integer> queue) {
+    public Selection(IHallRoomsQueue queue) {
         for (Integer i : queue) {
             this.queue.add(i);
         }
     }
 
-    public void setQueue(List<Integer> queue) {
+    public void setQueue(IHallRoomsQueue queue) {
         this.queue.clear();
         for (Integer i : queue) {
             this.queue.add(i);

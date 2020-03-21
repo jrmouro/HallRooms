@@ -5,7 +5,7 @@
  */
 package com.jrmouro.hallrooms.allocator.selection;
 
-import java.util.List;
+import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class OrderSelection extends Selection {
 
-    public OrderSelection(List<Integer> queue) {
+    public OrderSelection(IHallRoomsQueue queue) {
         super(queue);
     }
 

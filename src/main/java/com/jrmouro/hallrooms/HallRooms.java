@@ -16,12 +16,13 @@ import java.util.logging.Logger;
 import com.jrmouro.hallrooms.hallroomsinstance.ISplitter;
 import com.jrmouro.hallrooms.utils.Initializable;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
+import com.jrmouro.hallrooms.utils.evaluable.HardEvaluable;
 
 /**
  *
  * @author ronaldo
  */
-public class HallRooms implements IEvaluable<Double>, Initializable {
+public class HallRooms extends HardEvaluable<Double> implements Initializable {
 
     IHallRoomsInstance instance = null;
     AllocationN2 allocation = null;
@@ -103,12 +104,14 @@ public class HallRooms implements IEvaluable<Double>, Initializable {
     }
 
     @Override
-    public void evaluate() {
-
+    protected boolean processEvaluation() {
         if (this.isInitialized()) {
 
             this.allocation = allocator.allocate(instance);
-            this.allocation.evaluate();
+            if(!this.allocation.wasEvaluated()){
+                this.allocation.evaluate();
+            }
+            return true;
 
         } else {
             try {
@@ -117,8 +120,16 @@ public class HallRooms implements IEvaluable<Double>, Initializable {
                 Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        return false;
     }
+
+    @Override
+    public void reset() {
+        this.allocation = null;
+    }
+    
+    
+
 
     public Double[][] getCostMatrix() {
 

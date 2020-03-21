@@ -7,7 +7,6 @@ package com.jrmouro.hallrooms.allocator;
 
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import com.jrmouro.hallrooms.allocation.AllocationN2;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
@@ -49,7 +48,7 @@ public abstract class SelectionAllocatorN2 extends AncestorAllocatorN2{
 
         if (this.isInitialized()) {
 
-            List<Integer> queue = queue(instance);
+            IHallRoomsQueue queue = queue(instance);
 
             return IAllocatorN2.allocate(instance, this.selection, queue);
 
@@ -64,6 +63,11 @@ public abstract class SelectionAllocatorN2 extends AncestorAllocatorN2{
         }
         
         return null;
+    }
+    
+    @Override
+    public AllocationN2 allocate(AllocationN2 allocation) {
+        return this.allocate(allocation.getInstance());
     }
 
     @Override
@@ -80,6 +84,6 @@ public abstract class SelectionAllocatorN2 extends AncestorAllocatorN2{
         return this.selection != null;
     }
 
-    public abstract List<Integer> queue(IHallRoomsInstance instance);
+    public abstract IHallRoomsQueue queue(IHallRoomsInstance instance);
 
 }
