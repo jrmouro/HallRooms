@@ -6,7 +6,6 @@
 package com.jrmouro.hallrooms.allocator;
 
 import com.jrmouro.hallrooms.utils.IAncestor;
-import com.jrmouro.hallrooms.utils.Initializable;
 
 /**
  *

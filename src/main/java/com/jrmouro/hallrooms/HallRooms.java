@@ -38,6 +38,10 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
         this.allocator = allocator;
     }
     
+    public HallRooms(AllocationN2 allocation) {
+        this.allocation = allocation;
+    }
+    
     public HallRooms() { }
 
     @Override
@@ -105,12 +109,16 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
 
     @Override
     protected boolean processEvaluation() {
+        
         if (this.isInitialized()) {
 
-            this.allocation = allocator.allocate(instance);
+            if(this.allocator != null)
+                this.allocation = allocator.allocate(instance);
+            
             if(!this.allocation.wasEvaluated()){
                 this.allocation.evaluate();
             }
+            
             return true;
 
         } else {
@@ -120,6 +128,7 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
                 Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
         return false;
     }
 
@@ -127,46 +136,8 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
     public void reset() {
         this.allocation = null;
     }
+   
     
-    
-
-
-    public Double[][] getCostMatrix() {
-
-        if (this.isInitialized()) {
-
-            return AllocationN2.getCostMatrix(this.instance, this.allocation);
-
-        } else {
-            try {
-                throw new Exception("Do not initialized");
-            } catch (Exception ex) {
-                Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return null;
-    }
-
-    public Double[][] getDistanceMatrix() {
-
-        if (this.wasEvaluated()) {
-
-            return AllocationN2.getDistanceMatrix(allocation);
-
-        } else {
-
-            try {
-                throw new Exception("Did not evaluated");
-            } catch (Exception ex) {
-                Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-        return null;
-    }
-
     public AllocationN2 getAllocation() {
 
         if (this.wasEvaluated()) {
@@ -207,32 +178,13 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
     public String toString() {
 
         StringBuffer str = new StringBuffer("HallRooms\n\n");
-        str.append(instance.toString()).append("\n\n");
-        str.append(allocator.toString()).append("\n\n");
+        
+        if(this.allocator != null)
+            str.append(allocator.toString()).append("\n\n");
 
-        if (this.wasEvaluated()) {
-            str.append(allocation.toString()).append("\n\n");
-
-            str.append("\ndistanceMatrix:\n");
-            for (Double d[] : this.getDistanceMatrix()) {
-                str.append(" ");
-                for (Double dd : d) {
-                    str.append(dd).append(" ");
-                }
-                str.append("\n");
-            }
-
-            str.append("\n\ncostMatrix:\n");
-            for (Double d[] : this.getCostMatrix()) {
-                str.append(" ");
-                for (Double dd : d) {
-                    str.append(dd).append(" ");
-                }
-                str.append("\n");
-            }
-        } else {
-            str.append("\n\nDid not evalueted");
-        }
+        if(this.wasEvaluated())
+            str.append(this.allocation);
+        
 
         return str.toString();
     }
@@ -277,9 +229,9 @@ public class HallRooms extends HardEvaluable<Double> implements Initializable {
 
     @Override
     public boolean isInitialized() {
-        return this.instance != null && this.instance.isInitialized()
-                //&& this.allocation != null && this.allocation.isInitialized()
-                && this.allocator != null && this.allocator.isInitialized();
+        return (this.instance != null && this.instance.isInitialized()
+                && this.allocator != null && this.allocator.isInitialized()) ||
+                (this.allocation != null && this.allocation.isInitialized());
     }
 
     @Override

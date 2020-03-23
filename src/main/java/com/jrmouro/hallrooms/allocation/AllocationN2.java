@@ -5,6 +5,7 @@
  */
 package com.jrmouro.hallrooms.allocation;
 
+import com.jrmouro.hallrooms.HallRooms;
 import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
@@ -27,6 +28,14 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
     private IHallRoomsQueue queue = null;
     private Double[][] allocMatrixN2 = null;
     private Double cost = null;
+    
+    public AllocationN2(IHallRoomsInstance instance, Double[][] allocMatrixN2) {
+
+        this.instance = instance;
+        this.allocMatrixN2 = allocMatrixN2;
+        this.cost = getTotalCost(instance, this);
+
+    }
 
     public AllocationN2(IHallRoomsInstance instance, Selection selection, IHallRoomsQueue queue) {
 
@@ -142,6 +151,43 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         }
         return null;
     }
+    
+    public Double[][] getCostMatrix() {
+
+        if (this.isInitialized()) {
+
+            return AllocationN2.getCostMatrix(this.instance, this);
+
+        } else {
+            try {
+                throw new Exception("Do not initialized");
+            } catch (Exception ex) {
+                Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return null;
+    }
+
+    public Double[][] getDistanceMatrix() {
+
+        if (this.wasEvaluated()) {
+
+            return AllocationN2.getDistanceMatrix(this);
+
+        } else {
+
+            try {
+                throw new Exception("Did not evaluated");
+            } catch (Exception ex) {
+                Logger.getLogger(HallRooms.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        return null;
+    }
+
 
     public static Double getPartialCost(IHallRoomsInstance instance, AllocationN2 allocation, int ind) {
 
@@ -456,6 +502,9 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         StringBuffer str = new StringBuffer();
 
         str.append("Allocation:\n");
+        if(this.instance != null);
+            str.append(instance.toString()).append("\n\n");
+        
         int count = 0;
         for (Double[] d : this.allocMatrixN2) {
 
@@ -472,9 +521,32 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
             str.append("\n");
 
         }
+        
+        if (this.wasEvaluated()) {            
 
-        if (this.wasEvaluated()) {
-            str.append("\nCost: ").append(this.getCost());
+            str.append("\ndistanceMatrix:\n");
+            for (Double d[] : this.getDistanceMatrix()) {
+                str.append(" ");
+                for (Double dd : d) {
+                    str.append(dd).append(" ");
+                }
+                str.append("\n");
+            }
+
+            str.append("\n\ncostMatrix:\n");
+            for (Double d[] : this.getCostMatrix()) {
+                str.append(" ");
+                for (Double dd : d) {
+                    str.append(dd).append(" ");
+                }
+                str.append("\n");
+            }
+            
+            
+            str.append("\nTotal cost: ").append(this.getCost());
+        
+        } else {
+            str.append("\n\nDid not evalueted");
         }
 
         return str.toString();

@@ -22,18 +22,23 @@ import java.util.logging.Logger;
 public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
 
     private SelectionAllocatorN2 initialAllocator = null;
-    private ISearchStrategy strategy = null;  
+    private ISearchStrategy strategy = null;
 
-    public LocalSearchAllocatorN2() { }
-    
+    public LocalSearchAllocatorN2() {
+    }
+
     public LocalSearchAllocatorN2(boolean isAncestor) {
         super(isAncestor);
     }
     
+    public LocalSearchAllocatorN2(ISearchStrategy strategy) {
+        this.strategy = strategy;
+    }
+
     public LocalSearchAllocatorN2(SelectionAllocatorN2 initialAllocator, ISearchStrategy strategy) {
         this.initialAllocator = initialAllocator;
         this.strategy = strategy;
-        
+
     }
 
     public LocalSearchAllocatorN2(SelectionAllocatorN2 initialAllocator, ISearchStrategy strategy, boolean isAncestor) {
@@ -58,24 +63,35 @@ public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
         this.strategy = strategy;
     }
 
-        
     @Override
     public AllocationN2 allocate(IHallRoomsInstance instance) {
-        
-        if(this.isInitialized()){
 
-            IHallRoomsQueue initial = this.initialAllocator.queue(instance);
+        if (this.isInitialized()) {
 
-            return this.strategy.search(instance, initial);
-        
-        }else{
-            
+            if (this.initialAllocator != null) {
+
+                IHallRoomsQueue initial = this.initialAllocator.queue(instance);
+
+                return this.strategy.search(instance, initial);
+
+            } else {
+
+                try {
+                    throw new Exception("This only works with initial SelectionAllocatorN2");
+                } catch (Exception ex) {
+                    Logger.getLogger(LocalSearchAllocatorN2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        } else {
+
             try {
                 throw new Exception("Do not initialized");
             } catch (Exception ex) {
                 Logger.getLogger(LocalSearchAllocatorN2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
 
         return null;
@@ -83,46 +99,47 @@ public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
 
     @Override
     public AllocationN2 allocate(AllocationN2 allocation) {
-        if(this.isInitialized()){
-            
+
+        if (this.isInitialized()) {
+
             return this.strategy.search(allocation.getInstance(), allocation.getQueue());
-        
-        }else{
-            
+
+        } else {
+
             try {
                 throw new Exception("Do not initialized");
             } catch (Exception ex) {
                 Logger.getLogger(LocalSearchAllocatorN2.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
 
         return null;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "LocalSearchAllocatorN2"
-                + "\n  allocator initial: " + initialAllocator.toString()
-                + "\n  strategy: " + strategy.toString();
+        
+        StringBuffer str = new StringBuffer("LocalSearchAllocatorN2");
+        if(this.initialAllocator != null)
+            str.append("\n  allocator initial: ").append(initialAllocator.toString());
+        str.append("\n  strategy: ").append(strategy.toString());
+        return str.toString();
     }
 
     @Override
     public void initialize(Object... o) {
-        
+
         if (o != null) {
-            
+
             for (Object object : o) {
-                    
 
                 if (object instanceof ISearchStrategy) {
                     this.strategy = (ISearchStrategy) object;
                 }
 
                 if (object instanceof AncestorAllocatorN2) {
-                    if(((AncestorAllocatorN2)object).isAncestor()){
+                    if (((AncestorAllocatorN2) object).isAncestor()) {
                         this.initialAllocator = (SelectionAllocatorN2) object;
                         if (!this.initialAllocator.isInitialized()) {
                             this.initialAllocator.initialize(o);
@@ -132,12 +149,12 @@ public final class LocalSearchAllocatorN2 extends AncestorAllocatorN2 {
 
             }
         }
-        
+
     }
 
     @Override
     public boolean isInitialized() {
-        return this.initialAllocator != null && this.initialAllocator.isInitialized() && this.strategy != null;
+        return /*this.initialAllocator != null && this.initialAllocator.isInitialized() &&*/ this.strategy != null;
     }
 
 }

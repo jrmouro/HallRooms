@@ -6,11 +6,8 @@
 package com.jrmouro.hallrooms.allocator.localsearch;
 
 import com.jrmouro.hallrooms.HallRooms;
-import com.jrmouro.hallrooms.allocator.hungarian.HungarianAllocatorN2;
 import com.jrmouro.hallrooms.allocator.localsearch.strategy.BestSearchStrategy;
 import com.jrmouro.hallrooms.allocator.naive.NaiveAllocatorN2;
-import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
-import com.jrmouro.hallrooms.allocator.selection.RandomRateSelection;
 import com.jrmouro.hallrooms.allocator.selection.RandomSelection;
 import com.jrmouro.hallrooms.hallroomsinstance.HallRoomsReaderInstance;
 import java.io.File;
