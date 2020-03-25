@@ -6,8 +6,8 @@
 package com.jrmouro.hallrooms.allocator.hungarian;
 
 import com.jrmouro.hallrooms.allocation.AllocationN2;
-import com.jrmouro.hallrooms.allocator.HallRoomsQueue;
-import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.HallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import java.util.ArrayList;

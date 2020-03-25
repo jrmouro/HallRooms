@@ -5,7 +5,7 @@
  */
 package com.jrmouro.hallrooms.allocator.selection;
 
-import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import java.util.Random;
 
 /**

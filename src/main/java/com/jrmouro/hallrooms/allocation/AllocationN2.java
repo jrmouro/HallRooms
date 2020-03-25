@@ -6,7 +6,7 @@
 package com.jrmouro.hallrooms.allocation;
 
 import com.jrmouro.hallrooms.HallRooms;
-import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
 import java.util.logging.Level;

@@ -8,7 +8,7 @@ package com.jrmouro.hallrooms.allocator.localsearch;
 import com.jrmouro.hallrooms.allocator.localsearch.strategy.ISearchStrategy;
 import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.AncestorAllocatorN2;
-import com.jrmouro.hallrooms.allocator.IHallRoomsQueue;
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
 import java.util.List;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;

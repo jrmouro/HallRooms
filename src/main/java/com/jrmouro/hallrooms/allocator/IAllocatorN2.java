@@ -5,6 +5,7 @@
  */
 package com.jrmouro.hallrooms.allocator;
 
+import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
