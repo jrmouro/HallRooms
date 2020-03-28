@@ -28,6 +28,8 @@ public class SimulatedAnnealingSearchStrategy extends SearchSingleQueueStrategy 
     public AllocationN2 search(IHallRoomsInstance instance, IHallRoomsQueue initialQueue) {
         
         AllocationN2 atualAllocation = this.allocate(instance, initialQueue);
+        
+        AllocationN2 fitnessAllocation = atualAllocation;
 
         Double atualCost = atualAllocation.getCost();        
         
@@ -40,6 +42,10 @@ public class SimulatedAnnealingSearchStrategy extends SearchSingleQueueStrategy 
             AllocationN2 neighborAllocation = this.allocate(instance, neighbor);
                     
             Double neighborCost = neighborAllocation.getCost();
+            Double fitnessCost = fitnessAllocation.getCost();
+            
+            if(neighborCost < fitnessCost)
+                fitnessAllocation = neighborAllocation;
             
             double deltaPerTemp = (atualCost - neighborCost)/temp;
             
@@ -54,7 +60,7 @@ public class SimulatedAnnealingSearchStrategy extends SearchSingleQueueStrategy 
             
         }
 
-        return atualAllocation;
+        return fitnessAllocation;
 
     }
 
