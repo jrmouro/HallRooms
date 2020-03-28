@@ -31,7 +31,8 @@ public class SimulatedAnnealingSearchStrategy extends SearchSingleQueueStrategy 
         
         AllocationN2 fitnessAllocation = atualAllocation;
 
-        Double atualCost = atualAllocation.getCost();        
+        Double atualCost = atualAllocation.getCost(); 
+        Double fitnessCost = fitnessAllocation.getCost();
         
         for (int i = 0; i < this.iterations; i++) {
             
@@ -42,10 +43,13 @@ public class SimulatedAnnealingSearchStrategy extends SearchSingleQueueStrategy 
             AllocationN2 neighborAllocation = this.allocate(instance, neighbor);
                     
             Double neighborCost = neighborAllocation.getCost();
-            Double fitnessCost = fitnessAllocation.getCost();
             
-            if(neighborCost < fitnessCost)
+            
+            if(neighborCost < fitnessCost){
                 fitnessAllocation = neighborAllocation;
+                fitnessCost = neighborCost;
+                i = 0;
+            }
             
             double deltaPerTemp = (atualCost - neighborCost)/temp;
             

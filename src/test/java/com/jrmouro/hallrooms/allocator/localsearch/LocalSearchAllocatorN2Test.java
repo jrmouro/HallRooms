@@ -10,7 +10,6 @@ import com.jrmouro.hallrooms.allocator.localsearch.strategy.BestSearchStrategy;
 import com.jrmouro.hallrooms.allocator.localsearch.strategy.SimulatedAnnealingSearchStrategy;
 import com.jrmouro.hallrooms.allocator.naive.NaiveAllocatorN2;
 import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
-import com.jrmouro.hallrooms.allocator.selection.RandomSelection;
 import com.jrmouro.hallrooms.hallroomsinstance.HallRoomsReaderInstance;
 import java.io.File;
 import org.junit.jupiter.api.Test;
@@ -81,7 +80,7 @@ public class LocalSearchAllocatorN2Test {
             new NaiveAllocatorN2(),
             new OrderSelection(),
             new LocalSearchAllocatorN2(false),
-            new SimulatedAnnealingSearchStrategy(10000, 0.1),
+            new SimulatedAnnealingSearchStrategy(100, 0.3),
             new HallRooms()
         };
         
