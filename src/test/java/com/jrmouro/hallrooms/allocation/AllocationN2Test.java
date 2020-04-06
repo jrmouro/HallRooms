@@ -53,7 +53,7 @@ public class AllocationN2Test {
         
         System.out.println(hall);
         
-        System.out.println(allocation.getCost()/2.0);
+        System.out.println("Metade do custo: "+allocation.getCost()/2.0);
         
         
     }

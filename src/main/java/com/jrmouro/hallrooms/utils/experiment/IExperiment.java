@@ -6,7 +6,6 @@
 package com.jrmouro.hallrooms.utils.experiment;
 
 import com.jrmouro.hallrooms.utils.Initializable;
-import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
 
 /**
  *
