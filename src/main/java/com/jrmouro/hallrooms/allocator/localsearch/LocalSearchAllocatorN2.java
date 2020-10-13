@@ -10,7 +10,6 @@ import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.AncestorAllocatorN2;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
-import java.util.List;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 import java.util.logging.Level;
 import java.util.logging.Logger;

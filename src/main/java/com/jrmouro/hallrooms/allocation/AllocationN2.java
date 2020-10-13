@@ -504,7 +504,8 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         str.append("Allocation:\n");
         if(this.instance != null);
             str.append(instance.toString()).append("\n\n");
-        
+            
+        str.append("allocMatrixN2:\n");
         int count = 0;
         for (Double[] d : this.allocMatrixN2) {
 

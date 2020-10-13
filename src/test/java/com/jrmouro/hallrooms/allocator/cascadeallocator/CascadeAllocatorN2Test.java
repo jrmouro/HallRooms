@@ -29,6 +29,7 @@ public class CascadeAllocatorN2Test {
      */
     @Test
     public void testAppend() {
+        
         System.out.println("append");
 
         HallRoomsReaderInstance instance = new HallRoomsReaderInstance(

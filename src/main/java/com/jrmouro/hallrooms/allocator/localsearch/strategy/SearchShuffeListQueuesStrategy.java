@@ -18,16 +18,16 @@ import java.util.Collections;
  */
 public abstract class SearchShuffeListQueuesStrategy extends SearchStrategy {
     
-    public List<IHallRoomsQueue> queues(IHallRoomsInstance instance, IHallRoomsQueue initial) {
+    public List<IHallRoomsQueue> queues(IHallRoomsInstance instance, IHallRoomsQueue ref) {
 
         List<IHallRoomsQueue> ret = new ArrayList();
 
-        for (int i = 0; i < initial.size() - 1; i++) {
+        for (int i = 0; i < ref.size() - 1; i++) {
 
-            for (int j = i + 1; j < initial.size(); j++) {
+            for (int j = i + 1; j < ref.size(); j++) {
 
                 IHallRoomsQueue queue = new HallRoomsQueue();
-                for (Integer ind : initial) {
+                for (Integer ind : ref) {
                     queue.add(ind);
                 }
 

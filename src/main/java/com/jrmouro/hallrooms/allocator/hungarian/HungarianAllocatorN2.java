@@ -5,7 +5,6 @@
  */
 package com.jrmouro.hallrooms.allocator.hungarian;
 
-import com.jrmouro.hallrooms.allocation.AllocationN2;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.HallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
@@ -37,6 +36,7 @@ public class HungarianAllocatorN2 extends SelectionAllocatorN2 {
         super(selection, isAncestor);
     }
 
+    @Override
     public IHallRoomsQueue queue(IHallRoomsInstance instance) {
 
         if (this.isInitialized()) {

@@ -1,8 +1,6 @@
 package com.jrmouro.hallrooms.hallroomsinstance;
 
 import com.jrmouro.hallrooms.utils.Initializable;
-import java.io.File;
-import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

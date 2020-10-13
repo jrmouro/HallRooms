@@ -9,8 +9,6 @@ import com.jrmouro.hallrooms.allocator.hallroomsqueue.HallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.SelectionAllocatorN2;
 import com.jrmouro.hallrooms.allocator.selection.Selection;
-import java.util.ArrayList;
-import java.util.List;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
 import java.util.logging.Level;
 import java.util.logging.Logger;

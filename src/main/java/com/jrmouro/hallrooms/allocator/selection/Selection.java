@@ -7,9 +7,7 @@ package com.jrmouro.hallrooms.allocator.selection;
 
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.HallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  *

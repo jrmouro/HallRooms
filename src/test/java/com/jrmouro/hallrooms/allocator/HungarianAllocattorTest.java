@@ -32,7 +32,7 @@ public class HungarianAllocattorTest {
         
         
         HallRoomsReaderInstance instance = new HallRoomsReaderInstance(
-                new File("Inst-10salas-1374.txt"),
+                new File("Inst-4salas-1374.txt"),
                 new ISplitter(){
                     @Override
                     public String get() {
