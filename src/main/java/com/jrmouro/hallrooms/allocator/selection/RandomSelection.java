@@ -12,23 +12,31 @@ import java.util.Random;
  *
  * @author ronaldo
  */
-public class RandomSelection extends Selection{
+public class RandomSelection extends Selection {
+
+    long seed;
+
+    public RandomSelection(IHallRoomsQueue queue, long seed) {
+        super(queue);
+        this.seed = seed;
+    }
+
+    public RandomSelection(long seed) {
+        this.seed = seed;
+    }
     
-    public RandomSelection(IHallRoomsQueue queue) {
-            super(queue);
-        }
-        
-        public RandomSelection() {} 
+    public RandomSelection() {
+        this.seed = System.nanoTime();
+    }
 
-        @Override
-        public int ruleSelection() {                        
-            return new Random().nextInt(queue.size());
-        }
+    @Override
+    public int ruleSelection() {
+        return new Random(this.seed++).nextInt(queue.size());
+    }
 
-        @Override
-        public String toString() {
-            return "RandomSelection";
-        }
-        
-        
+    @Override
+    public String toString() {
+        return "RandomSelection";
+    }
+
 }

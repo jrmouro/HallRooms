@@ -18,7 +18,6 @@ import com.jrmouro.hallrooms.allocator.IAllocatorN2;
 import com.jrmouro.hallrooms.allocator.hallroomsqueue.IHallRoomsQueue;
 import com.jrmouro.hallrooms.allocator.selection.OrderSelection;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
-import java.util.List;
 
 /**
  *

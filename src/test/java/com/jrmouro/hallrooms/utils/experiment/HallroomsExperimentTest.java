@@ -27,7 +27,7 @@ public class HallroomsExperimentTest {
         
         Experiment<Double> instance = new HallRoomsExperiment(
             new HallRooms(
-                new File("Inst-4salas-1374.txt"), () -> ",",
+                new File("Inst-56salas-296220.txt"), () -> ",",
                 new NaiveAllocatorN2(new OrderSelection())
             )
         );

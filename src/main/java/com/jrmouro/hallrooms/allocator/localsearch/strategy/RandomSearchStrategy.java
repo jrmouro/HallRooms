@@ -11,12 +11,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
+import java.util.ArrayList;
 
 /**
  *
  * @author ronaldo
  */
 public class RandomSearchStrategy extends SearchShuffeListQueuesStrategy {
+
+    long seed;
+
+    public RandomSearchStrategy(long seed) {
+        this.seed = seed;
+    }
 
     @Override
     public AllocationN2 search(IHallRoomsInstance instance, IHallRoomsQueue atualQueue) {
@@ -27,9 +34,7 @@ public class RandomSearchStrategy extends SearchShuffeListQueuesStrategy {
 
         List<IHallRoomsQueue> queues = queues(instance, atualQueue);
 
-        Random random = new Random();
-
-        Collections.shuffle(queues, random);
+        List<IHallRoomsQueue> aux = new ArrayList();
 
         for (IHallRoomsQueue queue : queues) {
 
@@ -38,15 +43,25 @@ public class RandomSearchStrategy extends SearchShuffeListQueuesStrategy {
             Double neighborCost = AllocationN2.getTotalCost(instance, neighborAllocation/*, true*/);
 
             if (neighborCost < atualCost) {
-                return search(instance, queue);
+
+                aux.add(queue);
+                
             }
 
         }
 
-        return atualAllocation;
+        if (aux.isEmpty()) {
+
+            return atualAllocation;
+
+        }
+
+        Collections.shuffle(aux, new Random(this.seed++));
+
+        return search(instance, aux.get(0));
 
     }
-    
+
     @Override
     public String toString() {
         return "RandomSearchStrategy";

@@ -27,11 +27,11 @@ public class HallRoomsInstanceTest {
         System.out.println("read");
         
         HallRoomsReaderInstance instance = new HallRoomsReaderInstance(
-                new File("Inst-10salas-1374.txt"),
+                new File("Inst-56salas-296220.txt"),
                 new ISplitter(){
                     @Override
                     public String get() {
-                        return ",";
+                        return " ";
                     }
                 });        
         

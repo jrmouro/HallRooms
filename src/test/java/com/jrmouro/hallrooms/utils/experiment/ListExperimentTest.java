@@ -98,7 +98,7 @@ public class ListExperimentTest {
 
         this.listSearchStrategy.add(new BestSearchStrategy());
         this.listSearchStrategy.add(new FirstSearchStrategy());
-        this.listSearchStrategy.add(new RandomSearchStrategy());
+        this.listSearchStrategy.add(new RandomSearchStrategy(System.nanoTime()));
 
         for (ISearchStrategy strategy : this.listSearchStrategy) {
             for (Selection selection : this.listSelection) {

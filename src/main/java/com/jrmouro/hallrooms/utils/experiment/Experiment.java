@@ -5,7 +5,6 @@
  */
 package com.jrmouro.hallrooms.utils.experiment;
 
-import com.jrmouro.hallrooms.utils.Initializable;
 import com.jrmouro.hallrooms.utils.evaluable.HardEvaluable;
 import com.jrmouro.hallrooms.utils.evaluable.IEvaluable;
 import java.util.logging.Level;

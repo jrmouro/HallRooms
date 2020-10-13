@@ -41,6 +41,7 @@ public class NaiveAllocatorN2 extends SelectionAllocatorN2 {
             for (int i = 0; i < instance.getRoomsNumber(); i++) {
                 ret.add(i);
             }
+            ret.shuffle();
             return ret;
         } else {
             try {
