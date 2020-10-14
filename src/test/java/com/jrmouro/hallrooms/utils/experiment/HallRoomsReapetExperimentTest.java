@@ -26,12 +26,12 @@ import org.junit.jupiter.api.Test;
 public class HallRoomsReapetExperimentTest {
 
     GenenticAllocatorN2 geneticAllocator = new GenenticAllocatorN2(
-            60,
+            80,
             20,
             5,
-            100,
+            300,
             .5,
-            .2,
+            .5,
             .5
     );
 
@@ -39,17 +39,17 @@ public class HallRoomsReapetExperimentTest {
 
     LocalSearchAllocatorN2 bestLocalSearchAllocatorN2 = new LocalSearchAllocatorN2(
             new NaiveAllocatorN2(new RandomSelection()),
-            new BestSearchStrategy()
+            new BestSearchStrategy(10)
     );
 
     LocalSearchAllocatorN2 firstLocalSearchAllocatorN2 = new LocalSearchAllocatorN2(
             new NaiveAllocatorN2(new RandomSelection()),
-            new FirstSearchStrategy()
+            new FirstSearchStrategy(10)
     );
 
     LocalSearchAllocatorN2 randomLocalSearchAllocatorN2 = new LocalSearchAllocatorN2(
             new NaiveAllocatorN2(new RandomSelection()),
-            new RandomSearchStrategy(System.nanoTime())
+            new RandomSearchStrategy(10, System.nanoTime())
     );
 
     public HallRoomsReapetExperimentTest() {
@@ -63,7 +63,7 @@ public class HallRoomsReapetExperimentTest {
         System.out.println("run");
 
         IHallRoomsInstance[] instances = {
-            new HallRoomsReaderInstance(
+            /*new HallRoomsReaderInstance(
                 new File("Inst-10salas-1374.txt"),
                 new ISplitter() {
                     @Override
@@ -81,23 +81,32 @@ public class HallRoomsReapetExperimentTest {
                     }
                 }
             ), 
-//            new HallRoomsReaderInstance(
-//                new File("Inst-56salas-296220.txt"),
-//                new ISplitter() {
-//                    @Override
-//                    public String get() {
-//                        return " ";
-//                    }
-//                }
-//            )
+            new HallRoomsReaderInstance(
+                new File("Inst-15salas-3195.txt"),
+                new ISplitter() {
+                    @Override
+                    public String get() {
+                        return ",";
+                    }
+                }
+            ),*/
+            new HallRoomsReaderInstance(
+                new File("QAP_sko56_05_n"),
+                new ISplitter() {
+                    @Override
+                    public String get() {
+                        return " ";
+                    }
+                }
+            )
         };
 
         IAllocatorN2[] allocators = {
             geneticAllocator,
-            naiveAllocatorN2,
-            bestLocalSearchAllocatorN2,
-            firstLocalSearchAllocatorN2,
-            randomLocalSearchAllocatorN2
+            //naiveAllocatorN2,
+            //bestLocalSearchAllocatorN2,
+            //firstLocalSearchAllocatorN2,
+            //randomLocalSearchAllocatorN2
         };
 
         HallRoomsReapetExperiment experiment = new HallRoomsReapetExperiment(

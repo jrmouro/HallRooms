@@ -48,6 +48,19 @@ public class AllocationN2Test {
             {12.5, null}, //10
         };
         
+        Double[][] allocLit ={
+            {19.0, null}, //1
+            { 7.5, null}, //2
+            {26.5, null}, //3            
+            {null, 11.0}, //4
+            {null, 14.0}, //5           
+            { 3.0, null}, //6
+            {null, 19.0}, //7
+            {null,  4.5}, //8            
+            {null, 26.0}, //9
+            {12.5, null}, //10
+        };
+        
         AllocationN2 allocation = new AllocationN2(instance, alloc);
         HallRooms hall = new HallRooms(allocation);
         

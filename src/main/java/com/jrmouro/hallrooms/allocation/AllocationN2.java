@@ -226,7 +226,7 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         //if (updateCost) {
         //allocation.setCost(ret);
         //}
-        return ret;
+        return ret/2.0;
 
     }
 

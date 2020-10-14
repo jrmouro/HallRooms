@@ -44,7 +44,7 @@ public class LocalSearchAllocatorN2Test {
             new NaiveAllocatorN2(),
             new OrderSelection(),
             new LocalSearchAllocatorN2(false),
-            new BestSearchStrategy(),
+            new BestSearchStrategy(10),
             new HallRooms()
         };
         
@@ -69,11 +69,11 @@ public class LocalSearchAllocatorN2Test {
         System.out.println("\nSimulatedAnnealingSearchStrategy");
         
         Object[] o = {
-            new File("Inst-10salas-1374.txt"),
+            new File("Inst-56salas-296220.txt"),
             new ISplitter(){
                 @Override
                 public String get() {
-                    return ",";
+                    return " ";
                 }            
             },
             new HallRoomsReaderInstance(),

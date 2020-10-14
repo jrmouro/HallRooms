@@ -16,6 +16,12 @@ import com.jrmouro.hallrooms.hallroomsinstance.IHallRoomsInstance;
  */
 public class FirstSearchStrategy extends SearchShuffeListQueuesStrategy {
 
+    public FirstSearchStrategy(int size) {
+        super(size);
+    }
+    
+    
+
     @Override
     public AllocationN2 search(IHallRoomsInstance instance, IHallRoomsQueue atualQueue) {
 

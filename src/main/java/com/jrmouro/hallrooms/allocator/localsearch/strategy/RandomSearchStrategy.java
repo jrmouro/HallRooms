@@ -21,7 +21,8 @@ public class RandomSearchStrategy extends SearchShuffeListQueuesStrategy {
 
     long seed;
 
-    public RandomSearchStrategy(long seed) {
+    public RandomSearchStrategy(int size, long seed) {
+        super(size);
         this.seed = seed;
     }
 

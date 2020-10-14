@@ -44,7 +44,7 @@ public class CascadeAllocatorN2Test {
         GenenticAllocatorN2 geneticAllocator0 = new GenenticAllocatorN2(100, 20, 5, 1000, .5, .2, .5);
         GenenticAllocatorN2 geneticAllocator1 = new GenenticAllocatorN2(50, 10, 3, 5000, .5, .5, .5);
         SelectionAllocatorN2 hungarianAllocator = new HungarianAllocatorN2(new OrderSelection());
-        AncestorAllocatorN2 localSearch = new LocalSearchAllocatorN2(new BestSearchStrategy());
+        AncestorAllocatorN2 localSearch = new LocalSearchAllocatorN2(new BestSearchStrategy(10));
 
         CascadeAllocatorN2 cascadeAllocator = new CascadeAllocatorN2();
         AllocationN2 alloc = cascadeAllocator
