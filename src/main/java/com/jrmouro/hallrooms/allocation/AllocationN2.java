@@ -28,7 +28,7 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
     private IHallRoomsQueue queue = null;
     private Double[][] allocMatrixN2 = null;
     private Double cost = null;
-    
+
     public AllocationN2(IHallRoomsInstance instance, Double[][] allocMatrixN2) {
 
         this.instance = instance;
@@ -151,7 +151,7 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         }
         return null;
     }
-    
+
     public Double[][] getCostMatrix() {
 
         if (this.isInitialized()) {
@@ -188,7 +188,6 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         return null;
     }
 
-
     public static Double getPartialCost(IHallRoomsInstance instance, AllocationN2 allocation, int ind) {
 
         Double[] distanceVector = getDistanceVector(allocation, ind);
@@ -222,11 +221,8 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
             }
 
         }
-
-        //if (updateCost) {
-        //allocation.setCost(ret);
-        //}
-        return ret/2.0;
+        
+        return ret / 2.0;
 
     }
 
@@ -425,7 +421,7 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         return ret;
 
     }
-
+    
     public static Double[][] allocateMatrixN2(IHallRoomsInstance instance, Selection selection, IHallRoomsQueue queue) {
 
         selection.setQueue(queue);
@@ -502,9 +498,9 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
         StringBuffer str = new StringBuffer();
 
         str.append("Allocation:\n");
-        if(this.instance != null);
-            str.append(instance.toString()).append("\n\n");
-            
+        if (this.instance != null);
+        str.append(instance.toString()).append("\n\n");
+
         str.append("allocMatrixN2:\n");
         int count = 0;
         for (Double[] d : this.allocMatrixN2) {
@@ -522,8 +518,8 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
             str.append("\n");
 
         }
-        
-        if (this.wasEvaluated()) {            
+
+        if (this.wasEvaluated()) {
 
             str.append("\ndistanceMatrix:\n");
             for (Double d[] : this.getDistanceMatrix()) {
@@ -542,10 +538,9 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
                 }
                 str.append("\n");
             }
-            
-            
+
             str.append("\nTotal cost: ").append(this.getCost());
-        
+
         } else {
             str.append("\n\nDid not evalueted");
         }
@@ -590,11 +585,12 @@ public class AllocationN2 extends HardEvaluable<Double> implements Initializable
 
                     if (this.instance.getRoomsNumber() == this.allocMatrixN2.length) {
                         for (Double[] doubles : this.allocMatrixN2) {
-                            if(doubles.length == 2)
-                                if ((doubles[0] != null && doubles[1] == null)||
-                                        (doubles[0] == null && doubles[1] != null)) {
+                            if (doubles.length == 2) {
+                                if ((doubles[0] != null && doubles[1] == null)
+                                        || (doubles[0] == null && doubles[1] != null)) {
                                     return true;
                                 }
+                            }
                         }
                     }
 

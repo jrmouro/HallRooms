@@ -17,7 +17,8 @@ public abstract class Selection implements Iterator<Integer> {
 
     final protected IHallRoomsQueue queue = new HallRoomsQueue();
 
-    public Selection() { }
+    public Selection() {
+    }
 
     public Selection(IHallRoomsQueue queue) {
         for (Integer i : queue) {
@@ -43,6 +44,16 @@ public abstract class Selection implements Iterator<Integer> {
         Integer ret = this.queue.get(ind);
         this.queue.remove(ind);
         return ret;
+    }
+
+    public void add(Integer i) {
+        
+        this.queue.add(i);
+
+    }
+    
+    public int size(){
+        return this.queue.size();
     }
 
     public abstract int ruleSelection();

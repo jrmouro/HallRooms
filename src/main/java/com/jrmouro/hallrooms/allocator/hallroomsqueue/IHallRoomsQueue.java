@@ -25,6 +25,7 @@ public interface IHallRoomsQueue extends Iterable<Integer>{
     public int size();
     public void set(int index, Integer value);
     public void shuffle();
+    public void circle(int n);
     
     public static List<Integer> getQueueList(IHallRoomsQueue hallRoomsQueue){
         List<Integer> ret = new ArrayList();

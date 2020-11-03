@@ -141,7 +141,7 @@ public class HallRoomsQueue implements IHallRoomsQueue {
 
     @Override
     public void set(int index, Integer value) {
-        
+
         if (!this.list.isEmpty()) {
             if (index >= 0 && index < this.list.size()) {
                 Integer v = this.list.get(index);
@@ -162,7 +162,7 @@ public class HallRoomsQueue implements IHallRoomsQueue {
                 Logger.getLogger(HallRoomsQueue.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
 
     @Override
@@ -171,16 +171,28 @@ public class HallRoomsQueue implements IHallRoomsQueue {
     }
 
     @Override
-    public String toString() {
+    public void circle(int n) {
         
+        if (!this.list.isEmpty()) {
+            
+            for (int i = 0; i < n; i++) {
+                
+                Integer v = this.list.remove(0);
+                this.list.add(v);
+
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+
         StringBuffer str = new StringBuffer("HallRoomsQueue\n  list: ");
         for (Integer integer : this.list) {
             str.append(integer).append(", ");
         }
-        
+
         return str.toString();
     }
 
-    
-    
 }
